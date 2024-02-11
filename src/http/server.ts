@@ -4,8 +4,11 @@ import { fastifyWebsocket } from "@fastify/websocket";
 import { createPoll } from "./routes/create-poll";
 import { getPoll } from "./routes/get-poll";
 import { getAllPolls } from "./routes/get-all-polls";
+import { deletePoll } from "./routes/delete-poll";
+import { updatePoll } from "./routes/update-poll";
 import { voteOnPoll } from "./routes/vote-on-poll";
 import { pollResults } from "./ws/poll-results";
+import cors from '@fastify/cors'
 
 const app = fastify();
 
@@ -21,6 +24,10 @@ app.register(getPoll);
 app.register(getAllPolls);
 app.register(voteOnPoll);
 app.register(pollResults)
+app.register(deletePoll)
+app.register(updatePoll)
+
+app.register(cors)
 
 app.listen({ port: 3333 }).then(() => {
   console.log("HTTP server running");
