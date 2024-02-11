@@ -17,7 +17,7 @@ export async function createPoll(app: FastifyInstance) {
         options: {
           createMany: {
             data: options.map((o) => {
-              return { title: o };
+              return { title: o, score: 0 };
             }),
           },
         },
