@@ -30,9 +30,9 @@ export async function getPoll(app: FastifyInstance) {
     const result = await redis.zrange(pollId, 0, -1, "WITHSCORES");
 
     const votes = result.reduce((obj, line, index) => {
-      if (index % 2 == 0) {
+      if (index % 2 === 0) {
         const score = result[index + 1];
-        Object.assign(obj, { line: Number(score) });
+        Object.assign(obj, { [line]: Number(score) });
       }
       return obj;
     }, {} as Record<string, number>);
