@@ -33,6 +33,7 @@ app.register(updatePoll);
 app.register(get);
 
 app.register(cors, {
+  methods: ["GET", "PUSH", "PATCH", "DELETE"],
   origin: true,
 });
 
