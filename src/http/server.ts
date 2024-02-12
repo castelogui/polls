@@ -33,7 +33,7 @@ app.register(updatePoll);
 app.register(get);
 
 app.register(cors, {
-  origin: false,
+  origin: true,
 });
 
 const PORT = process.env.PORT || 3333;
