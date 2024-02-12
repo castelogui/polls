@@ -10,6 +10,10 @@ export async function deletePoll(app: FastifyInstance) {
 
     const { pollId } = deletePollParams.parse(request.params);
 
+    const voteOptionsDelete = prisma.vote.deleteMany({
+      where: { pollId },
+    });
+
     const pollOptionDelete = prisma.pollOption.deleteMany({
       where: { pollId },
     });
@@ -17,6 +21,7 @@ export async function deletePoll(app: FastifyInstance) {
     const pollDelete = prisma.poll.delete({ where: { id: pollId } });
 
     const transaction = await prisma.$transaction([
+      voteOptionsDelete,
       pollOptionDelete,
       pollDelete,
     ]);
