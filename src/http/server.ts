@@ -30,9 +30,7 @@ app.register(pollResults);
 app.register(deletePoll);
 app.register(updatePoll);
 
-app.register(cors, {
-  allowedHeaders: "Access-Control-Allow-Origin"
-});
+app.register(cors);
 
 const PORT = process.env.PORT || 3333;
 
