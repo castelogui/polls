@@ -18,13 +18,13 @@ export async function voteOnPoll(app: FastifyInstance) {
     const { pollId } = voteOnPollParams.parse(request.params);
     const { pollOptionId } = voteOnPollBody.parse(request.body);
 
-    let { sessionId } = request.cookies;
+    let sessionId = request.headers.getsetcookie;
 
-    if (sessionId) {
+    if (sessionId && sessionId !== "undefined") {
       const userPreviousVoteOnPoll = await prisma.vote.findUnique({
         where: {
           sessionId_pollId: {
-            sessionId,
+            sessionId: sessionId.toString(),
             pollId,
           },
         },
@@ -72,7 +72,7 @@ export async function voteOnPoll(app: FastifyInstance) {
       data: {
         pollId,
         pollOptionId,
-        sessionId,
+        sessionId: sessionId.toString(),
       },
     });
 

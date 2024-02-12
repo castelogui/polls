@@ -12,12 +12,12 @@ export async function createPoll(app: FastifyInstance) {
 
     const { title, options } = createPollBody.parse(request.body);
 
-    let { sessionIdCreatePoll } = request.cookies;
+    let sessionId = request.headers.getsetcookie;
 
-    if (!sessionIdCreatePoll) {
-      sessionIdCreatePoll = randomUUID();
+    if (!sessionId || sessionId == "undefined") {
+      sessionId = randomUUID();
 
-      reply.setCookie("sessionIdCreatePoll", sessionIdCreatePoll, {
+      reply.setCookie("sessionId", sessionId, {
         path: "/",
         maxAge: 60 * 60 * 24 * 30, // 30days
         signed: true,
@@ -25,20 +25,22 @@ export async function createPoll(app: FastifyInstance) {
       });
     }
 
-    const poll = await prisma.poll.create({
-      data: {
-        title,
-        sessionIdCreatePoll,
-        options: {
-          createMany: {
-            data: options.map((o) => {
-              return { title: o, score: 0 };
-            }),
+    if (sessionId) {
+      const poll = await prisma.poll.create({
+        data: {
+          title,
+          sessionIdCreatePoll: String(sessionId),
+          options: {
+            createMany: {
+              data: options.map((o) => {
+                return { title: o, score: 0 };
+              }),
+            },
           },
         },
-      },
-    });
+      });
 
-    return reply.status(201).send({ pollId: poll.id, sessionIdCreatePoll: sessionIdCreatePoll });
+      return reply.status(201).send({ pollId: poll.id, sessionId: sessionId });
+    }
   });
 }
