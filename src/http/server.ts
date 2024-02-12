@@ -9,6 +9,9 @@ import { updatePoll } from "./routes/update-poll";
 import { voteOnPoll } from "./routes/vote-on-poll";
 import { pollResults } from "./ws/poll-results";
 import cors from '@fastify/cors'
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = fastify();
 
@@ -29,7 +32,9 @@ app.register(updatePoll)
 
 app.register(cors)
 
-app.listen({ port: 3333 }).then(() => {
+const PORT = process.env.PORT || 3333;
+
+app.listen(PORT).then(() => {
   console.log("HTTP server running");
 });
 
