@@ -32,9 +32,7 @@ app.register(deletePoll);
 app.register(updatePoll);
 app.register(get);
 
-app.register(cors, {
-  origin: ["https://webpolls.vercel.app", "http://localhost:3000"],
-});
+app.register(cors);
 
 const PORT = process.env.PORT || 3333;
 
