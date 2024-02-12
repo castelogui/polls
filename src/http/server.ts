@@ -7,6 +7,7 @@ import { getAllPolls } from "./routes/get-all-polls";
 import { deletePoll } from "./routes/delete-poll";
 import { updatePoll } from "./routes/update-poll";
 import { voteOnPoll } from "./routes/vote-on-poll";
+import { get } from "./routes/get";
 import { pollResults } from "./ws/poll-results";
 import cors from "@fastify/cors";
 import dotenv from "dotenv";
@@ -29,9 +30,10 @@ app.register(voteOnPoll);
 app.register(pollResults);
 app.register(deletePoll);
 app.register(updatePoll);
+app.register(get);
 
 app.register(cors, {
-  origin: ["https://webpolls.vercel.app", "http://localhost:3000"]
+  origin: ["https://webpolls.vercel.app", "http://localhost:3000"],
 });
 
 const PORT = process.env.PORT || 3333;
