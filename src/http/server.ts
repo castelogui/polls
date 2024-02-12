@@ -33,7 +33,7 @@ app.register(updatePoll);
 app.register(get);
 
 app.register(cors, {
-  methods: ["GET","POST", "DELETE", "PUT", "PATH"],
+  methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
   origin: "https://webpolls.vercel.app/",
 });
 
