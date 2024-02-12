@@ -29,8 +29,11 @@ export async function getAllPolls(app: FastifyInstance) {
 
     const returnPolls: PollReturn[] = [] as PollReturn[];
 
+    let { sessionIdCreatePoll } = request.cookies;
+
     await Promise.all(
       polls.map(async (poll) => {
+        //if (sessionIdCreatePoll == poll.sessionIdCreatePoll) {
         const result = await redis.zrange(poll.id, 0, -1, "WITHSCORES");
 
         const votes = result.reduce((obj, line, index) => {
@@ -55,6 +58,7 @@ export async function getAllPolls(app: FastifyInstance) {
           }),
         };
         returnPolls.push(pollReturn);
+        //}
       })
     );
 
