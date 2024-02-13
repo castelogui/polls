@@ -1,6 +1,10 @@
+![NLW](https://github.com/castelogui/polls/blob/main/assets/nlw.png)
+
+<p align="center">
+	
 # Polls - NLW Expert Trilha Node.js
 
-![NLW](https://github.com/castelogui/polls/blob/main/assets/nlw.png)
+</p>
 
 Backend desenvolvido na NLW Expert trilha de Node.js.
 Desenvolvi o fronend [WebPolls](https://github.com/castelogui/webpolls)
