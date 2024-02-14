@@ -40,7 +40,8 @@ export async function voteOnPoll(app: FastifyInstance) {
           },
         });
 
-        const votes = await redis.zincrby(
+        await redis.connect()
+        const votes = await redis.zIncrBy(
           pollId,
           -1,
           userPreviousVoteOnPoll.pollOptionId
@@ -76,13 +77,13 @@ export async function voteOnPoll(app: FastifyInstance) {
       },
     });
 
-    const votes = await redis.zincrby(pollId, 1, pollOptionId);
+    const votes = await redis.zIncrBy(pollId, 1, pollOptionId);
 
     voting.publish(pollId, {
       pollOptionId,
       votes: Number(votes),
     });
-
+    await redis.disconnect()
     return reply.status(201).send({ sessionId });
   });
 }
