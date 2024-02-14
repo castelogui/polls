@@ -34,7 +34,7 @@ app.register(get);
 
 app.register(cors, {
   methods: ["GET", "PUSH", "PATCH", "DELETE"],
-  origin: true,
+  origin: "https://webpolls.up.railway.app",
 });
 
 const PORT = process.env.PORT || 3333;
