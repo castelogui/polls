@@ -36,7 +36,7 @@ export async function getAllPolls(app: FastifyInstance) {
     await Promise.all(
       polls.map(async (poll) => {
         if (sessionIdCreatePoll == poll.sessionIdCreatePoll) {
-          const result = await redis.zRange(poll.id, 0, -1);
+          const result = await redis.zRangeByScore(poll.id, 0, -1);
 
           const votes = result.reduce((obj, line, index) => {
             if (index % 2 === 0) {
