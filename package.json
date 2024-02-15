@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/http/server.ts",
     "build": "npx tsx",
-    "start": "node dist/http/server.js"
+    "start": "npx prisma generate && npx prisma migrate dev && pnpm run build && node dist/http/server.js"
   },
   "keywords": [],
   "author": "",

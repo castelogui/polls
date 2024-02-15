@@ -19,10 +19,5 @@ COPY . .
 # Expor a porta 3333
 EXPOSE 3333
 
-# Executar os comandos necessários
-RUN npx prisma generate
-RUN npx prisma migrate dev
-RUN pnpm run build
-
 # Iniciar o aplicativo
 CMD ["pnpm", "run", "start"]
