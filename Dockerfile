@@ -10,6 +10,8 @@ RUN apt-get update && \
 # Instalar o gerenciador de pacotes pnpm
 RUN npm install -g pnpm
 
+RUN pnpm i
+
 # Definir o diretório de trabalho como /app
 WORKDIR .
 
