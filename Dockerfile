@@ -20,7 +20,6 @@ COPY . .
 EXPOSE 3333
 
 # Executar os comandos necessários
-RUN pnpm install -g prisma
 RUN npx prisma generate
 RUN npx prisma migrate dev
 RUN pnpm run build
