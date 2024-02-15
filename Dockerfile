@@ -19,4 +19,4 @@ COPY ./dist ./app
 EXPOSE 3333
 
 # Iniciar o aplicativo
-CMD ["node", "dist/http/server.js"]
+CMD ["node", "app/http/server.js"]
