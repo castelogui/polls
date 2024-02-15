@@ -1,11 +1,11 @@
 FROM ubuntu:latest AS build
 
 RUN apt-get update && apt-get install -y nodejs npm \
-    && rm -rf /var/lib/apt/lists/*
+    && npm install -g n \
+    && n stable \
+    && ln -sf /usr/local/bin/node /usr/bin/node
 
 COPY . .
-
-WORKDIR .
 
 RUN npm install
 
