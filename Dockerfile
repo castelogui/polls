@@ -7,17 +7,16 @@ RUN apt-get update && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs
 
-# Instalar o gerenciador de pacotes pnpm
-RUN npm install -g prisma
+RUN npm install -g npm@10.4.0
 
 # Definir o diretório de trabalho como /app
-WORKDIR .
+WORKDIR /app
 
 # Copiar todo o conteúdo da pasta raiz do projeto "polls" para o diretório /app dentro do contêiner
-COPY . .
+COPY ./dist ./app
 
 # Expor a porta 3333
 EXPOSE 3333
 
 # Iniciar o aplicativo
-CMD ["pnpm", "run", "start"]
+CMD ["node", "dist/http/server.js"]
