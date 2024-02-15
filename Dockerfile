@@ -4,7 +4,7 @@ FROM ubuntu:latest
 # Atualizar os pacotes e instalar o Node.js
 RUN apt-get update && \
     apt-get install -y curl && \
-    curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs
 
 # Instalar o gerenciador de pacotes pnpm
