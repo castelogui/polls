@@ -11,10 +11,10 @@ RUN apt-get update && \
 RUN npm install -g pnpm
 
 # Definir o diretório de trabalho como /app
-WORKDIR /app
+WORKDIR .
 
 # Copiar todo o conteúdo da pasta raiz do projeto "polls" para o diretório /app dentro do contêiner
-COPY ./polls /app
+COPY . .
 
 # Expor a porta 3333
 EXPOSE 3333
