@@ -7,7 +7,7 @@ COPY . .
 
 WORKDIR .
 
-RUN npm install --production
+RUN npm install
 
 RUN npm run build
 
