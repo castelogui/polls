@@ -8,7 +8,7 @@ RUN apt-get update && \
     apt-get install -y nodejs
 
 # Instalar o gerenciador de pacotes pnpm
-RUN npm install -g pnpm
+RUN npm install -g prisma
 
 # Definir o diretório de trabalho como /app
 WORKDIR .
