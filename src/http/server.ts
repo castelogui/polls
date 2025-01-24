@@ -34,12 +34,16 @@ app.register(get);
 
 app.register(cors, {
   methods: ["GET", "PUSH", "PATCH", "DELETE"],
-  origin: "https://webpolls.up.railway.app",
+  origin: "0.0.0.0",
 });
 
 const PORT = process.env.PORT || 3333;
 
-app.listen(PORT).then(() => {
+// Alteração: usando a versão recomendada do listen
+app.listen({
+  port: Number(PORT),
+  host: '0.0.0.0',
+}).then(() => {
   console.log("HTTP server running");
 });
 

@@ -78,54 +78,58 @@ WebSocket: ws://localhost:3333/polls/:pollId/results
 
 ## Setup
 
-### Docker
+### Rodando com Docker
 
-Inicie o docker compose
+Suba os contêineres com o docker-compose
 
 ```bash
-# Dentro da pasta raiz do projeto
 docker-compose up -d
 ```
+ou
 
 ```bash
-# Defina a seguinte váriavel no .env
-DATABASE_URL="postgresql://docker:docker@localhost:5432/polls?schema=public"
+docker-compose up --build
 ```
+----
 
-### Dependencias
+### Rodando local
 
 Instale as dependências utilizando:
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-----
-
-## Development Server
-
-Inicie o servidor de desenvolvimento em `http://localhost:3333` com o seguinte comando:
+Alterar o arquivo `.env` e adicione as variáveis de ambiente.
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+DATABASE_URL=link_your_database
+REDIS_URL=link_your_redis
+PORT=port_number
 ```
+
+Altere o provider do prisma no arquivo `prisma/schema.prisma` para banco de dados de sua preferencia.
+
+```bash
+#Exemplo
+provider = "postgresql"
+```
+
+Crie o banco de dados e rode as migrations
+
+```bash
+npx prisma migrate dev
+```
+
+Inicie o servidor de desenvolvimento com o seguinte comando:
+
+```bash
+npm run dev
+```
+
+Ou faça o build e inicie o servidor com:
+
+```bash
+npm run start
+```
+O servidor estará disponível em `http://localhost:3333`.

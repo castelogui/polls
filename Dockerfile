@@ -1,22 +1,23 @@
-# Use uma imagem base do Ubuntu
 FROM ubuntu:latest
 
-# Atualizar os pacotes e instalar o Node.js
+# Atualizar pacotes, instalar o Node.js e dependências
 RUN apt-get update && \
     apt-get install -y curl && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
+    apt-get install -y nodejs && \
+    npm install -g npm
 
-RUN npm install -g npm@10.4.0
-
-# Definir o diretório de trabalho como /app
+# Definir o diretório de trabalho
 WORKDIR /app
 
-# Copiar todo o conteúdo da pasta raiz do projeto "polls" para o diretório /app dentro do contêiner
-COPY ./dist ./app
+# Copiar os arquivos do projeto para a pasta app
+COPY . /app
+
+# Instalar as dependências do projeto
+RUN npm install
 
 # Expor a porta 3333
 EXPOSE 3333
 
-# Iniciar o aplicativo
-CMD ["node", "app/http/server.js"]
+# Rodar a aplicação
+CMD ["npm", "run", "start"]

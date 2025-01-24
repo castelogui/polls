@@ -11,6 +11,12 @@ services:
       - POSTGRES_DB=polls
     volumes:
       - polls_pg_data:/bitnami/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "docker", "-d", "polls", "-h", "localhost"]
+      interval: 5s
+      retries: 5
+      start_period: 15s
+      timeout: 5s
 
   redis:
     image: bitnami/redis:latest
@@ -20,6 +26,23 @@ services:
       - '6379:6379'
     volumes:
       - 'polls_redis_data:/bitnami/redis/data'
+
+  backend:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      - DATABASE_URL=postgresql://docker:docker@postgres:5432/polls?schema=public
+      - REDIS_URL=redis://redis:6379
+      - PORT=3333
+    ports:
+      - "3333:3333"
+    expose:
+      - "3333"
+    entrypoint: ["npm", "run", "start"]
 
 volumes:
   polls_pg_data:
